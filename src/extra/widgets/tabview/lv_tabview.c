@@ -86,7 +86,7 @@ lv_obj_t * lv_tabview_add_tab(lv_obj_t * obj, const char * name)
         lv_memcpy_small(new_map, old_map, sizeof(const char *) * (tab_id - 1));
         new_map[tab_id - 1] = lv_mem_alloc(strlen(name) + 1);
         strcpy((char *)new_map[tab_id - 1], name);
-        new_map[tab_id] = "";
+        new_map[tab_id] = (char *)"";
     }
     /*left or right dir*/
     else {
@@ -95,12 +95,12 @@ lv_obj_t * lv_tabview_add_tab(lv_obj_t * obj, const char * name)
         if(tabview->tab_cnt == 0) {
             new_map[0] = lv_mem_alloc(strlen(name) + 1);
             strcpy((char *)new_map[0], name);
-            new_map[1] = "";
+            new_map[1] = (char *)"";
         }
         else {
-            new_map[tab_id * 2 - 3] = "\n";
+            new_map[tab_id * 2 - 3] = (char *)"\n";
             new_map[tab_id * 2 - 2] = lv_mem_alloc(strlen(name) + 1);
-            new_map[tab_id * 2 - 1] = "";
+            new_map[tab_id * 2 - 1] = (char *)"";
             strcpy((char *)new_map[(tab_id * 2) - 2], name);
         }
     }
@@ -225,7 +225,7 @@ static void lv_tabview_constructor(const lv_obj_class_t * class_p, lv_obj_t * ob
 
     lv_btnmatrix_set_one_checked(btnm, true);
     tabview->map = lv_mem_alloc(sizeof(const char *));
-    tabview->map[0] = "";
+    tabview->map[0] = (char *)"";
     lv_btnmatrix_set_map(btnm, (const char **)tabview->map);
     lv_obj_add_event_cb(btnm, btns_value_changed_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
     lv_obj_add_flag(btnm, LV_OBJ_FLAG_EVENT_BUBBLE);
